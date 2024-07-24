@@ -15,8 +15,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+
+
+api_v1_urls = [
+    path("auth/", include("authentication.urls"), name="authentication")
+]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/', include(api_v1_urls), name="api_v1")
 ]
+
+# Note: We can make versioning better maybe by adding another list variable like 'APIs' then and version into it
+# but this is a simple project and for versioning I like to change project structure and handle versioning in the structure itself
