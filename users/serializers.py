@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from users.models import User
 from rest_framework import serializers
 
 
@@ -8,7 +8,7 @@ from rest_framework import serializers
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'is_staff')
+        fields = ('username', 'gpt_api_key', 'is_staff')
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):
@@ -16,3 +16,10 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ("username", "password", "confirm_password")
+
+
+class UserUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'gpt_api_key')
+        

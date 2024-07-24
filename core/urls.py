@@ -19,7 +19,7 @@ from django.urls import path, include
 
 
 api_v1_urls = [
-    path("auth/", include("users.urls"), name="users")
+    path("users/", include("users.urls"), name="users")
 ]
 
 urlpatterns = [
