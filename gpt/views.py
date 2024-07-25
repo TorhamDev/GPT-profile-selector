@@ -13,14 +13,13 @@ class AskGPTForProfileView(APIView):
         serializer = AddImageSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user_images = Images.objects.filter(
-            pk__in=serializer.validated_data["image_ids"],
-            user__pk=request.user.pk
+            pk__in=serializer.validated_data["image_ids"], user__pk=request.user.pk
         )
 
         gpt_answer = ask_gpt_about_profile(
             api_key=request.user.gpt_api_key,
             username=request.user.username,
-            user_images=user_images
+            user_images=user_images,
         )
 
         return Response(gpt_answer)

@@ -5,7 +5,8 @@ from rest_framework import serializers
 class AddImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Images
-        fields = ('user', 'image')
+        fields = ("user", "image")
+
 
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
