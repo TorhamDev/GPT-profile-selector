@@ -8,7 +8,7 @@ from rest_framework import serializers
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'gpt_api_key', 'is_staff')
+        fields = ('id', 'username', 'gpt_api_key', 'is_staff')
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):

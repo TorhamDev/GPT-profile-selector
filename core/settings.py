@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 LOCAL_APPS = [
     "users",
     "users_media",
+    "gpt",
 ]
 THIRD_PARTY_APPS = [
     "rest_framework",

@@ -6,7 +6,8 @@ from django.conf.urls.static import static
 
 api_v1_urls = [
     path("users/", include("users.urls"), name="users"),
-    path("media/", include("users_media.urls"), name="user_meida")
+    path("media/", include("users_media.urls"), name="user_meida"),
+    path("gpt/", include("gpt.urls"), name="gpt_apis")
 ]
 
 urlpatterns = [

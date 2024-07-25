@@ -5,6 +5,7 @@ from rest_framework.exceptions import ValidationError
 from users.serializers import UserSerializer, UserRegisterSerializer, UserUpdateSerializer
 from users.models import User
 from django.shortcuts import get_object_or_404
+from rest_framework import permissions
 
 
 
@@ -28,14 +29,13 @@ class UserRegisterView(APIView):
     
 
 class UserUpdateView(APIView):
-    def put(self, request, userpk):
+    permission_classes = [permissions.IsAuthenticated]
 
-        user = get_object_or_404(User, pk=userpk)
 
+    def put(self, request):
+        user = get_object_or_404(User, pk=request.user.pk)
         serializer = UserUpdateSerializer(instance=user, data=request.data)
-
         serializer.is_valid(raise_exception=True)
-        
         serializer.save(update_fields=["username", "gpt_api_key"])
         
 
