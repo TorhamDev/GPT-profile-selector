@@ -22,7 +22,6 @@ class AskGPTForProfileView(APIView):
             username=request.user.username,
             user_images=user_images,
         )
-        print(gpt_answer)
 
         return Response(
             {

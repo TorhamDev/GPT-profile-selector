@@ -1,6 +1,7 @@
 import base64
 import requests
 from users_media.models import Images
+from rest_framework.exceptions import APIException
 
 
 def encode_image(image_path):
@@ -53,8 +54,9 @@ def ask_gpt_about_profile(
     # Note: if you asking me its better to parse answer using regex
     # but no time for regex rn
 
-    print(response.json())
-    print(response.status_code)
+    if response.status_code != 200:
+        raise APIException(detail="OpenAI API Error.", code=400)
+    
     response = response.json()["choices"][0]["message"]["content"].split("\n\n")
     selected_image = response[0][7:]
     select_reason = response[1][8:]
