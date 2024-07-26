@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework import permissions
 from rest_framework.response import Response
 from gpt.serializers import AddImageSerializer
+from users_media.serializers import ImageSerializer
 from users_media.models import Images
 from gpt.utils import ask_gpt_about_profile
 
@@ -21,5 +22,14 @@ class AskGPTForProfileView(APIView):
             username=request.user.username,
             user_images=user_images,
         )
+        print(gpt_answer)
 
-        return Response(gpt_answer)
+        return Response(
+            {
+                "selected_image": ImageSerializer(
+                    instance=user_images[gpt_answer["image"]-1],
+                    context={"request": request},
+                ).data,
+                "reason": gpt_answer["reason"],
+            }
+        )

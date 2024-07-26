@@ -52,8 +52,11 @@ def ask_gpt_about_profile(
 
     # Note: if you asking me its better to parse answer using regex
     # but no time for regex rn
+
+    print(response.json())
+    print(response.status_code)
     response = response.json()["choices"][0]["message"]["content"].split("\n\n")
     selected_image = response[0][7:]
     select_reason = response[1][8:]
 
-    return {"image": selected_image, "reason": select_reason}
+    return {"image": int(selected_image), "reason": select_reason}
